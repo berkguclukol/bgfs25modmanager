@@ -65,7 +65,7 @@ Mods that no savegame uses are flagged as **Unused**, together with how much spa
 | | Download | |
 | --- | --- | --- |
 | **Setup** *(recommended)* | [BGFS25ModManager-win-Setup.exe](https://github.com/berkguclukol/bgfs25modmanager/releases/latest/download/BGFS25ModManager-win-Setup.exe) | Installs in seconds without a wizard, adds Start menu and desktop shortcuts. |
-| **Portable** | [BGFS25ModManager-win-Portable.zip](https://github.com/berkguclukol/bgfs25modmanager/releases/latest/download/BGFS25ModManager-win-Portable.zip) | Extract anywhere and run `BGFS25ModManager.exe`. |
+| **Portable** | [BGFS25ModManager-win-Portable.zip](https://github.com/berkguclukol/bgfs25modmanager/releases/latest/download/BGFS25ModManager-win-Portable.zip) | Extract anywhere and run `BG FS25 Mod Manager.exe`. |
 
 No .NET installation needed · Windows 10/11 (64-bit) · both versions update themselves.
 
