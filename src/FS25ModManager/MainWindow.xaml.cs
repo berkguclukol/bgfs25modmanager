@@ -8,6 +8,7 @@ namespace FS25ModManager;
 public partial class MainWindow : FluentWindow
 {
     private readonly MainViewModel _viewModel = new();
+    private bool _finishingUpdate;
 
     public MainWindow()
     {
@@ -24,6 +25,17 @@ public partial class MainWindow : FluentWindow
         {
             await _viewModel.RefreshAsync();
             await _viewModel.CheckForUpdatesOnStartupAsync();
+        };
+        Closing += async (_, e) =>
+        {
+            // Closed while an update is still downloading: hide the window, finish the download
+            // in the background, then close for real so the update installs silently.
+            if (_finishingUpdate || !_viewModel.IsCheckingForUpdates) return;
+            e.Cancel = true;
+            _finishingUpdate = true;
+            Hide();
+            await _viewModel.WaitForUpdateDownloadAsync(TimeSpan.FromMinutes(2));
+            Close();
         };
         Closed += (_, _) => _viewModel.ApplyPendingUpdateOnExit();
     }

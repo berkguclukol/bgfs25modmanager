@@ -20,11 +20,20 @@ public partial class MainViewModel
 
     partial void OnUpdateReadyVersionChanged(string? value) => OnPropertyChanged(nameof(IsUpdateReady));
 
+    private Task _updateCheck = Task.CompletedTask;
+
     /// <summary>Called once at startup: checks in the background and downloads a new version without asking.</summary>
-    public Task CheckForUpdatesOnStartupAsync() => CheckForUpdatesCoreAsync(userInitiated: false);
+    public Task CheckForUpdatesOnStartupAsync() => _updateCheck = CheckForUpdatesCoreAsync(userInitiated: false);
 
     [RelayCommand]
-    private Task CheckForUpdatesAsync() => CheckForUpdatesCoreAsync(userInitiated: true);
+    private Task CheckForUpdatesAsync() => _updateCheck = CheckForUpdatesCoreAsync(userInitiated: true);
+
+    /// <summary>
+    /// Waits for a running update download to finish (up to <paramref name="timeout"/>), so closing the app
+    /// mid-download still installs the update instead of postponing it to the next start.
+    /// </summary>
+    public Task WaitForUpdateDownloadAsync(TimeSpan timeout) =>
+        IsCheckingForUpdates ? Task.WhenAny(_updateCheck, Task.Delay(timeout)) : Task.CompletedTask;
 
     private async Task CheckForUpdatesCoreAsync(bool userInitiated)
     {
