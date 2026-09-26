@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Builds, packs (Velopack) and optionally publishes a release to GitHub.
 
