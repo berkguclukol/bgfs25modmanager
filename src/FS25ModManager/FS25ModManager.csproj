@@ -12,7 +12,7 @@
     <Product>BG FS25 Mod Manager</Product>
     <AssemblyTitle>BG FS25 Mod Manager</AssemblyTitle>
     <Description>Mod manager for Farming Simulator 25</Description>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
     <StartupObject>FS25ModManager.Program</StartupObject>
   </PropertyGroup>
