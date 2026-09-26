@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FS25ModManager/FS25ModManager.csproj" />
+  </Folder>
+</Solution>

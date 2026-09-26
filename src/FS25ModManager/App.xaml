@@ -1,0 +1,24 @@
+<Application x:Class="FS25ModManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:conv="clr-namespace:FS25ModManager.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            <conv:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
+            <conv:NullToVisibilityConverter x:Key="NullToVis" />
+            <conv:NotNullToVisibilityConverter x:Key="NotNullToVis" />
+            <conv:BytesToStringConverter x:Key="BytesToString" />
+            <conv:InitialsConverter x:Key="Initials" />
+            <conv:EnumEqualsConverter x:Key="EnumEquals" />
+            <conv:PositiveToVisibilityConverter x:Key="PositiveToVis" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
