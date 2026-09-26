@@ -20,7 +20,12 @@ public partial class MainWindow : FluentWindow
             if (e.PropertyName == nameof(MainViewModel.SelectedMod) && _viewModel.SelectedMod is { } mod)
                 Dispatcher.BeginInvoke(() => ModList.ScrollIntoView(mod), System.Windows.Threading.DispatcherPriority.Background);
         };
-        Loaded += async (_, _) => await _viewModel.RefreshAsync();
+        Loaded += async (_, _) =>
+        {
+            await _viewModel.RefreshAsync();
+            await _viewModel.CheckForUpdatesOnStartupAsync();
+        };
+        Closed += (_, _) => _viewModel.ApplyPendingUpdateOnExit();
     }
 
     private static async Task<bool> ConfirmAsync(string title, string message, string confirmText)

@@ -371,6 +371,17 @@
                 <RadioButton Style="{StaticResource NavTab}" Content="About"
                              IsChecked="{Binding CurrentPage, Converter={StaticResource EnumEquals}, ConverterParameter={x:Static vm:AppPage.About}}" />
             </StackPanel>
+
+            <!-- Update ready: one click installs it; otherwise it installs when the app closes -->
+            <ui:Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,2,0,0" Appearance="Primary"
+                       Icon="{ui:SymbolIcon ArrowSync24}"
+                       Visibility="{Binding IsUpdateReady, Converter={StaticResource BoolToVis}}"
+                       ToolTip="{Binding UpdateStatus}"
+                       Command="{Binding RestartToUpdateCommand}">
+                <TextBlock>
+                    <Run Text="v" /><Run Text="{Binding UpdateReadyVersion, Mode=OneWay}" /><Run Text=" ready  ·  Restart to update" />
+                </TextBlock>
+            </ui:Button>
         </Grid>
 
         <!-- Notifications -->
@@ -910,6 +921,39 @@
                             <TextBlock>When a mod gets replaced, the old copy goes to the Recycle Bin so you can always restore it.</TextBlock>
                         </DockPanel>
                     </StackPanel>
+                </Border>
+
+                <!-- Updates -->
+                <TextBlock Text="Updates" FontSize="16" FontWeight="SemiBold" Margin="2,8,0,10"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                <Border Style="{StaticResource StatCard}" Margin="0,0,0,16" Padding="24,18">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Symbol="ArrowSync24" FontSize="20" Margin="0,0,14,0" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+                                <Run Text="Version" /> <Run Text="{x:Static app:AppInfo.Version}" />
+                            </TextBlock>
+                            <TextBlock Text="{Binding UpdateStatus}" TextWrapping="Wrap" Margin="0,2,0,0"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <ProgressBar Margin="0,8,0,0" Height="4" Maximum="100" Value="{Binding UpdateProgress}"
+                                         Visibility="{Binding IsCheckingForUpdates, Converter={StaticResource BoolToVis}}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="16,0,0,0" VerticalAlignment="Center">
+                            <ui:Button Content="Restart to update" Icon="{ui:SymbolIcon ArrowSync24}" Appearance="Primary"
+                                       Visibility="{Binding IsUpdateReady, Converter={StaticResource BoolToVis}}"
+                                       Command="{Binding RestartToUpdateCommand}" />
+                            <ui:Button Content="Check for updates" Icon="{ui:SymbolIcon ArrowClockwise24}"
+                                       Visibility="{Binding IsUpdateReady, Converter={StaticResource InverseBoolToVis}}"
+                                       IsEnabled="{Binding CanUpdate}"
+                                       Command="{Binding CheckForUpdatesCommand}" />
+                        </StackPanel>
+                    </Grid>
                 </Border>
 
                 <!-- Credits -->
