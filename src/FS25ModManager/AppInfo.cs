@@ -14,7 +14,7 @@ public static class AppInfo
     public const string DeveloperName = "Berk Güçlükol";
     public const string DeveloperBio = "Farming Simulator player and developer of BG FS25 Mod Manager.";
     public const string WebsiteUrl = "https://guclukol.net";
-    public const string GitHubUrl = "";
+    public const string GitHubUrl = "https://github.com/berkguclukol/bgfs25modmanager";
     public const string Email = "";
 
     public static string Version

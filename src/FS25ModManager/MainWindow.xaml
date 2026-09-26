@@ -930,6 +930,8 @@
                                             Content="CommunityToolkit.Mvvm — MVVM helpers  ·  MIT" />
                         <ui:HyperlinkButton Style="{StaticResource CreditLink}" NavigateUri="https://github.com/nickbabcock/Pfim"
                                             Content="Pfim — DDS icon decoding  ·  MIT" />
+                        <ui:HyperlinkButton Style="{StaticResource CreditLink}" NavigateUri="https://github.com/velopack/velopack"
+                                            Content="Velopack — installer and updates  ·  MIT" />
                     </StackPanel>
                 </Border>
 
