@@ -99,17 +99,17 @@ dotnet run --project src/FS25ModManager
 ```
 
 ### Creating a release
-Releases are packaged with [Velopack](https://velopack.io), which produces the setup, the portable zip and the update packages.
+Releases are packaged with [Velopack](https://velopack.io), which produces the setup, the portable zip and the small delta packages the app uses to update itself.
 
-```bash
-dotnet tool install -g vpk
-dotnet publish src/FS25ModManager/FS25ModManager.csproj -c Release -r win-x64 --self-contained -o publish
-vpk download github --repoUrl https://github.com/berkguclukol/bgfs25modmanager -o releases
-vpk pack --packId BGFS25ModManager --packVersion 1.x.x --packDir publish --mainExe BGFS25ModManager.exe --packTitle "BG FS25 Mod Manager" --icon src/FS25ModManager/Assets/app.ico -o releases
-vpk upload github --repoUrl https://github.com/berkguclukol/bgfs25modmanager --token <token> -o releases --publish --tag v1.x.x
+1. Bump `<Version>` in `src/FS25ModManager/FS25ModManager.csproj`, then commit and push.
+2. Write the release notes to a markdown file.
+3. Run (needs the [GitHub CLI](https://cli.github.com) logged in):
+
+```powershell
+./scripts/release.ps1 -Version 1.2.0 -NotesFile notes.md -Upload
 ```
 
-Bump `<Version>` in `src/FS25ModManager/FS25ModManager.csproj` first — the app shows that version and uses it for update checks.
+Leave out `-Upload` to only build the packages into `releases/velopack`. To try an update locally before publishing, start the installed app with `BGFS25_UPDATE_SOURCE` set to that folder.
 
 ### Project layout
 
